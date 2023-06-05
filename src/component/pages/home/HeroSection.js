@@ -37,7 +37,7 @@ const HeroSection = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-8 h-8 p-1 ring-2 ring-blue-500/50 rounded-full   "
+                  className="w-12 h-12 p-2 ring-2 bg-gray-200 ring-blue-500/50 rounded-full"
                 >
                   <path
                     strokeLinecap="round"
@@ -59,7 +59,7 @@ const HeroSection = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-8 h-8 p-1 ring-2 ring-blue-500/50 rounded-full   "
+                  className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
                 >
                   <path
                     strokeLinecap="round"
@@ -79,7 +79,7 @@ const HeroSection = () => {
         <div className="">
           <img src={House} className="relative " alt="" />
 
-          <div className=" absolute right-12 bottom-72 bg-[#023047] h-22 w-52 p-4">
+          {/* <div className=" absolute right-12 bottom-72 bg-[#023047] h-22 w-52 p-4">
             <div className="flex justify-between gap-4">
               <h2 className="text-white">Excellent</h2>
               <p className="text-white flex">
@@ -169,7 +169,7 @@ const HeroSection = () => {
             </div>
 
             <p className="text-white mt-4">From 3,264 reviews</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

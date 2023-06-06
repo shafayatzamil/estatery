@@ -36,7 +36,7 @@ const HeroSection = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                  stroke="#7065F0"
                   className="w-12 h-12 p-2 ring-2 bg-gray-200 ring-blue-500/50 rounded-full"
                 >
                   <path
@@ -58,7 +58,7 @@ const HeroSection = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                  stroke="#7065F0"
                   className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
                 >
                   <path
@@ -88,7 +88,7 @@ const HeroSection = () => {
                   fill="#00b4d8"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                 stroke="#7065F0"
                   className="w-6 h-6"
                 >
                   <path
@@ -108,7 +108,7 @@ const HeroSection = () => {
                   fill="#ffb703"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                 stroke="#7065F0"
                   className="w-6 h-6"
                 >
                   <path
@@ -124,7 +124,7 @@ const HeroSection = () => {
                   fill="#ffb703"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                 stroke="#7065F0"
                   className="w-6 h-6"
                 >
                   <path
@@ -140,7 +140,7 @@ const HeroSection = () => {
                   fill="#ffb703"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                 stroke="#7065F0"
                   className="w-6 h-6"
                 >
                   <path
@@ -156,7 +156,7 @@ const HeroSection = () => {
                   fill="#ffb703"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
+                 stroke="#7065F0"
                   className="w-6 h-6"
                 >
                   <path

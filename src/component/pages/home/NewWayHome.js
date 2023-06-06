@@ -3,7 +3,7 @@ import newHouse from "../../../assets/images/newhouse.jpg";
 
 const NewWayHome = () => {
   return (
-    <div className=" flex flex-row justify-center  gap-12 py-12">
+    <div className=" flex flex-row justify-center  gap-12 py-16">
       <div className="bg-violet-100  rounded-lg border basis-1/4">
         <div className="p-6">
           <h2 className="text-2xl font-bold text-[#100A55] py-4">
@@ -13,7 +13,7 @@ const NewWayHome = () => {
             Find your dream place to live in with <br /> more than 10k+
             properties listed.
           </p>
-          <button className=" btn bg-[#100A55] text-white">
+          <button className=" btn bg-[#100A55] -mb-4 text-white">
             Browse Properties
           </button>
         </div>
@@ -32,7 +32,7 @@ const NewWayHome = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="blue"
+                stroke="#7065F0"
                 className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
               >
                 <path
@@ -56,7 +56,7 @@ const NewWayHome = () => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="blue"
+              stroke="#7065F0"
               className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
             >
               <path
@@ -79,7 +79,7 @@ const NewWayHome = () => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="blue"
+              stroke="#7065F0"
               className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
             >
               <path
@@ -103,7 +103,7 @@ const NewWayHome = () => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="blue"
+              stroke="#7065F0"
               className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
             >
               <path

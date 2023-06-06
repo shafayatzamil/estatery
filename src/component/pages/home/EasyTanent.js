@@ -104,6 +104,21 @@ const EasyTanent = () => {
       </div>
 
       <hr className="mt-12 " />
+
+      <div className="flex justify-around my-12">
+        <div className="border-r-4 border-indigo-500 ">
+          <h2 className="text-4xl font-bold">7.4%</h2>
+          <p className="text-gray-400 mr-12">Property Return Rate</p>
+        </div>
+        <div className="border-r-4 border-indigo-500 ">
+          <h2 className="text-4xl font-bold">3,856</h2>
+          <p className="text-gray-400 mr-12">Property in Sell & Rent</p>
+        </div>
+        <div className="">
+          <h2 className="text-4xl font-bold">2,540</h2>
+          <p className="text-gray-400 ">Daily Completed Transactions</p>
+        </div>
+      </div>
     </div>
   );
 };

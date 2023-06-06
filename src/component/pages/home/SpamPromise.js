@@ -12,13 +12,20 @@ const SpamPromise = () => {
       <p className="text-gray-500">
         Discover ways to increase your home's value and get listed. No Spam.
       </p>
-      <div className="bg-white">
-        <input type="email" />
-        <button>Submit</button>
+      <div className="py-4 ">
+        <input
+          type="email"
+          placeholder="Enter your email address"
+          className="px-16 py-2 rounded-md"
+        />
+        <button className="bg-[#7065F0]  text-white px-6 py-2  rounded-md">
+          Submit
+        </button>
       </div>
 
       <p className="text-xs">
-        Join 10,000+ other landlords in our estatery community.
+        Join <span className="text-[#7065F0]"> 10,000+</span> other landlords in
+        our estatery community.
       </p>
     </div>
   );

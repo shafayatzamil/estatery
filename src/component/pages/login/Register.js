@@ -1,16 +1,19 @@
 import React from "react";
-import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { Link } from "react-router-dom";
+import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 
-const Login = () => {
+const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const form = e.target;
-    const loginUser = {
+    // take value from form
+    const createdUser = {
+      name: form.name.value,
       email: form.email.value,
       password: form.password.value,
     };
-    console.log(loginUser);
+    console.log(createdUser);
   };
 
   return (
@@ -23,11 +26,25 @@ const Login = () => {
 
         {/* form */}
         <div className=" mx-auto ">
-          <h1 className="text-5xl text-center font-bold pt-12">Hello Again</h1>
+          <h1 className="text-5xl text-center font-bold pt-12">
+            Please register!
+          </h1>
           <p className="text-center text-gray-400 mt-2">
             Lorem, ipsum dolor sit amet consectetur adipisicing
           </p>
           <form className="card-body" onSubmit={handleSubmit}>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                required
+                name="name"
+                placeholder="full-name"
+                className="input input-bordered"
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -35,6 +52,7 @@ const Login = () => {
               <input
                 type="text"
                 name="email"
+                required
                 placeholder="email"
                 className="input input-bordered"
               />
@@ -56,10 +74,13 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-3">
-              <input className="btn btn-primary" type="submit" value="Login" />
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Register"
+              />
             </div>
           </form>
-
           <div className="flex items-center pt-2 space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <p className="px-3 text-sm dark:text-gray-400">
@@ -104,10 +125,10 @@ const Login = () => {
           </div>
 
           <p className="text-center mb-12">
-            New to{" "}
+            Already have an account{" "}
             <span className="font-bold text-[#100A55] mr-2">Estatery?</span>
-            <Link className="text-orange-600 font-bold" to="/register">
-              Sign Up
+            <Link className="text-orange-600 font-bold" to="/login">
+              Login
             </Link>
           </p>
         </div>
@@ -116,4 +137,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

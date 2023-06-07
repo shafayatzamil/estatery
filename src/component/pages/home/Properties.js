@@ -12,7 +12,7 @@ const Properties = () => {
 
       <div className="flex justify-between px-16 py-8">
         <div className="px-4 py-2 rounded-md bg-[#E0DEF7]">
-          <button className="btn text-[##7065F0]">
+          <button className="btn text-[#7065F0]">
             {" "}
             <span>
               <svg

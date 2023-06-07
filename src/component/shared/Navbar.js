@@ -47,9 +47,12 @@ const Navbar = () => {
         {/* navbar button */}
 
         <div className="text-base mr-4">
-          <button className="border border-black py-1 font-medium px-3 rounded-md mr-3">
-            Login
-          </button>
+          <Link to="login">
+            {" "}
+            <button className="border border-black py-1 font-medium px-3 rounded-md mr-3">
+              Login
+            </button>
+          </Link>
           <button className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md">
             Signup
           </button>

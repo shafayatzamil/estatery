@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Login = () => {
+  const { login, googleSignIn, setUser } = useContext(AuthContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -10,7 +13,17 @@ const Login = () => {
       email: form.email.value,
       password: form.password.value,
     };
-    console.log(loginUser);
+    login(loginUser.email, loginUser.password)
+      .then((result) => {
+        const user = result.user;
+
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    form.reset();
   };
 
   return (

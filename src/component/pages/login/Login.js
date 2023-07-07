@@ -16,8 +16,24 @@ const Login = () => {
     login(loginUser.email, loginUser.password)
       .then((result) => {
         const user = result.user;
-
         console.log(user);
+
+        // current user for jwt token
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("estatery-token", data.token);
+          });
       })
       .catch((error) => {
         console.log(error);

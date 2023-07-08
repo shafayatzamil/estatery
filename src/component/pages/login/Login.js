@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const { login, googleSignIn, setUser } = useContext(AuthContext);
@@ -32,7 +33,12 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+
+            // token is set on local storage
             localStorage.setItem("estatery-token", data.token);
+
+            // nevigate to home page
+            <Navigate to="/" replace={true} />;
           });
       })
       .catch((error) => {

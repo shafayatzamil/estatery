@@ -1,8 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
+import { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 const Register = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handlePhoneNumberChange = (value) => {
+    setPhoneNumber(value);
+  };
+
+  // register button
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -12,8 +22,12 @@ const Register = () => {
       name: form.name.value,
       email: form.email.value,
       password: form.password.value,
+      phoneNumber,
     };
     console.log(createdUser);
+
+    // clear the form
+    form.reset();
   };
 
   return (
@@ -45,6 +59,20 @@ const Register = () => {
                 className="input input-bordered"
               />
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">phone</span>
+              </label>
+              <PhoneInput
+                placeholder="Enter phone number"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                className="input input-bordered"
+                defaultCountry="BD" // Set the default country code if needed
+              />
+            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -73,6 +101,7 @@ const Register = () => {
                 </a>
               </label>
             </div>
+
             <div className="form-control mt-3">
               <input
                 className="btn btn-primary"

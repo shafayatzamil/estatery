@@ -1,12 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [accountType, setAccountType] = useState("Rent");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const handlePhoneNumberChange = (value) => {
     setPhoneNumber(value);
@@ -18,15 +26,46 @@ const Register = () => {
 
     const form = e.target;
     // take value from form
-    const createdUser = {
+    const newUser = {
       name: form.name.value,
       email: form.email.value,
       password: form.password.value,
+      role: accountType,
       phoneNumber,
     };
-    console.log(createdUser);
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          // toast.success(data.message);
+          toast(`${data.message}`, {
+            icon: "👏",
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
+
+          navigate(from, { replace: true });
+        } else {
+          toast.error(data.error);
+        }
+      })
+      .catch((err) => {
+        console.dir(err.message);
+      });
+
+    // createUser(newUser.email,newUser.password)
 
     // clear the form
+    setPhoneNumber("");
+    setAccountType("");
     form.reset();
   };
 
@@ -34,8 +73,8 @@ const Register = () => {
     <div className="mt-6 p-12">
       <div className="flex bg-white">
         {/* loginImage */}
-        <div className="bg-[#2f5cbe] p-16 ">
-          <img src={loginImage} alt="" />
+        <div className="bg-[#2f5cbe]   p-12">
+          <img src={loginImage} className="" alt="" />
         </div>
 
         {/* form */}
@@ -43,10 +82,13 @@ const Register = () => {
           <h1 className="text-5xl text-center font-bold pt-12">
             Please register!
           </h1>
-          <p className="text-center text-gray-400 mt-2">
-            Lorem, ipsum dolor sit amet consectetur adipisicing
+          <p className="text-center text-blue-400 mt-2">
+            Are you a Buyyer ,Seller or Rent the house?
           </p>
+
+          {/* sign up form */}
           <form className="card-body" onSubmit={handleSubmit}>
+            {/* NAME */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -60,19 +102,7 @@ const Register = () => {
               />
             </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">phone</span>
-              </label>
-              <PhoneInput
-                placeholder="Enter phone number"
-                value={phoneNumber}
-                onChange={handlePhoneNumberChange}
-                className="input input-bordered"
-                defaultCountry="BD" // Set the default country code if needed
-              />
-            </div>
-
+            {/* EMAIL */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -85,7 +115,45 @@ const Register = () => {
                 className="input input-bordered"
               />
             </div>
-            <div className="form-control">
+
+            <div className="flex gap-2">
+              {/* PHONE */}
+              <div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">phone</span>
+                  </label>
+                  <PhoneInput
+                    placeholder="Enter phone number"
+                    value={phoneNumber}
+                    onChange={handlePhoneNumberChange}
+                    className="input input-bordered"
+                    defaultCountry="BD" // Set the default country code if needed
+                  />
+                </div>
+              </div>
+
+              {/* accunt role */}
+              <div>
+                <div className="form-control w-full max-w-xs">
+                  <label className="label">
+                    <span className="label-text">seller or buyer and rent</span>
+                  </label>
+                  <select
+                    className="select select-bordered"
+                    value={accountType}
+                    onChange={(e) => setAccountType(e.target.value)}
+                  >
+                    <option defaultValue={accountType}>Rent</option>
+                    <option>Buyer</option>
+                    <option>seller</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* PASSWORD */}
+            <div className="form-control ">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
@@ -95,6 +163,8 @@ const Register = () => {
                 placeholder="password"
                 className="input input-bordered"
               />
+
+              {/* forget password */}
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
                   Forgot password?
@@ -110,7 +180,7 @@ const Register = () => {
               />
             </div>
           </form>
-          <div className="flex items-center pt-2 space-x-1">
+          <div className="flex items-center  space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <p className="px-3 text-sm dark:text-gray-400">
               Login with social accounts

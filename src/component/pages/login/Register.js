@@ -6,9 +6,10 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/AuthProvider";
+import { Navigate } from "react-router-dom";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, verifyEmail } = useContext(AuthContext);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [accountType, setAccountType] = useState("Rent");
 
@@ -16,6 +17,7 @@ const Register = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
+  // handle phone number change
   const handlePhoneNumberChange = (value) => {
     setPhoneNumber(value);
   };
@@ -25,7 +27,7 @@ const Register = () => {
     e.preventDefault();
 
     const form = e.target;
-    // take value from form
+    // take value from user
     const newUser = {
       name: form.name.value,
       email: form.email.value,
@@ -34,6 +36,7 @@ const Register = () => {
       phoneNumber,
     };
 
+    // created user for backend
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -52,7 +55,8 @@ const Register = () => {
             },
           });
 
-          navigate(from, { replace: true });
+          // navigate(from, { replace: true });
+          <Navigate to="/login" replace={true} />;
         } else {
           toast.error(data.error);
         }
@@ -61,7 +65,32 @@ const Register = () => {
         console.dir(err.message);
       });
 
-    // createUser(newUser.email,newUser.password)
+    createUser(newUser.email, newUser.password)
+      .then(async (result) => {
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // token is set on local storage
+            localStorage.setItem("estatery-token", data.token);
+
+            // nevigate to home page
+            navigate(from, { replace: true });
+          });
+
+        verifyEmail().then(() =>
+          alert("please check your email and verify it")
+        );
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
 
     // clear the form
     setPhoneNumber("");
@@ -160,16 +189,10 @@ const Register = () => {
               <input
                 type="password"
                 name="password"
+                required
                 placeholder="password"
                 className="input input-bordered"
               />
-
-              {/* forget password */}
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
 
             <div className="form-control mt-3">

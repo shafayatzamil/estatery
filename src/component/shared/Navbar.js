@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   const links = [
     { to: "rent", name: "Rent" },
     { to: "buy", name: "Buy" },
@@ -9,11 +13,21 @@ const Navbar = () => {
     { to: "manageproperty", name: "Manage Property" },
     { to: "resource", name: "Resource" },
   ];
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        localStorage.removeItem("estatery-token");
+        toast.success("logout successful");
+      })
+      .catch((error) => toast.error("unable to logout", error.message));
+  };
+
   return (
     <div>
       <nav className="flex gap-10 items-center justify-between p-4 bg-violet-100">
         {/* navbar link */}
-        <div className="flex justify-center items-center  gap-4">
+        <div className="flex justify-center items-center  gap-4 mx-8">
           <Link to="/">
             <div className="flex items-center">
               <svg
@@ -46,18 +60,32 @@ const Navbar = () => {
 
         {/* navbar button */}
 
-        <div className="text-base mr-4">
-          <Link to="login">
-            {" "}
-            <button className="border border-black py-1 font-medium px-3 rounded-md mr-3">
-              Login
-            </button>
-          </Link>
-          <Link to="register">
-            <button className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md">
-              Signup
-            </button>
-          </Link>
+        <div className="text-base mx-8">
+          {user ? (
+            <>
+              <button
+                className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md"
+                onClick={handleLogOut}
+              >
+                {" "}
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                {" "}
+                <button className="border border-black py-1 font-medium px-3 rounded-md mr-3">
+                  Login
+                </button>
+              </Link>
+              <Link to="/register">
+                <button className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md">
+                  Signup
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </div>

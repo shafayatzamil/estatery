@@ -6,6 +6,8 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -23,21 +25,28 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // user created
   const createUser = (email, password) => {
     // setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // google sign in
   const googleSignIn = () => {
     return signInWithPopup(auth, googleProvider);
   };
+
+  // github sign in
   const signInWithGithub = () => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  // facebook sign in
   const singInWithFacebook = () => {
     return signInWithPopup(auth, facebookProvider);
   };
+
+  // profile update
   const updateUserProfile = (name, photo) => {
     setLoading(true);
     return updateProfile(auth.currentUser, {
@@ -45,15 +54,28 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // user login
   const login = (email, password) => {
     // setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // verify the email
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+
+  // forgot password set
+  const forgetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  // logout the user
   const logOut = () => {
     return signOut(auth);
   };
 
+  // current user check
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
@@ -72,6 +94,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     login,
     logOut,
+    verifyEmail,
+    forgetPassword,
     googleSignIn,
     signInWithGithub,
     singInWithFacebook,

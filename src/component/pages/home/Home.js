@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeroSection from "./HeroSection";
 import NewWayHome from "./NewWayHome";
 import Properties from "./Properties";
 import EasyTanent from "./EasyTanent";
 import SpamPromise from "./SpamPromise";
+import Footer from "../../shared/Footer";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Properties></Properties>
       <EasyTanent></EasyTanent>
       <SpamPromise></SpamPromise>
+      <Footer></Footer>
     </div>
   );
 };

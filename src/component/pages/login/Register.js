@@ -47,7 +47,7 @@ const Register = () => {
         if (data.success) {
           // toast.success(data.message);
           toast(`${data.message}`, {
-            icon: "👏",
+            icon: "✔",
             style: {
               borderRadius: "10px",
               background: "#333",

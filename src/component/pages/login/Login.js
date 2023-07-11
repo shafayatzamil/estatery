@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import Navbar from "../../shared/Navbar";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
-  const { login, googleSignIn, setUser } = useContext(AuthContext);
+  const { login, googleSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
+  // Submit button
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,6 +20,7 @@ const Login = () => {
       email: form.email.value,
       password: form.password.value,
     };
+
     login(loginUser.email, loginUser.password)
       .then((result) => {
         const user = result.user;
@@ -36,8 +39,6 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-
             // token is set on local storage
             localStorage.setItem("estatery-token", data.token);
 
@@ -54,7 +55,6 @@ const Login = () => {
 
   return (
     <>
-      <Navbar></Navbar>
       <div className=" p-12">
         <div className="flex bg-white h-5/6">
           {/* loginImage */}
@@ -93,9 +93,9 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <button className="label-text-alt link link-hover">
                     Forgot password?
-                  </a>
+                  </button>
                 </label>
               </div>
               <div className="form-control mt-3">

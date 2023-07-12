@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import loginImage from "../../../assets/images/Data_security_05-removebg-preview.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
-import Navbar from "../../shared/Navbar";
+
 import { toast } from "react-hot-toast";
 
 const Login = () => {

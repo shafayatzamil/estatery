@@ -9,20 +9,73 @@ const AddProperty = () => {
   const { user } = useContext(AuthContext);
   const [contactNumber, setContractNumber] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
+  const [imageInfo, setImageInfo] = useState();
+  const [imageURl, setImageURl] = useState("");
   // const [seller] = useSeller(user);
 
+  const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
+
+  // handle phone number change
   const handlePhoneNumberChange = (value) => {
     setContractNumber(value);
   };
 
+  // handle image change
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    console.log(file);
+    setImageInfo(file);
+  };
+
+  // handle submit button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    // imageHosting
+    const formData = new FormData();
+    formData.append("image", imageInfo);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        console.log(imageData);
+        if (imageData.success) {
+          setImageURl(imageData.data.url);
+        } else {
+          console.log("image cannot host");
+        }
+      });
+
+    const propertyInformation = {
+      name: form.name.value,
+      email: user?.email,
+      location: form.location.value,
+      bed: form.bed.value,
+      bathroom: form.bathroom.value,
+      squarefit: form.squarefit.value,
+      price: form.price.value,
+      description: form.description.value,
+      contactNumber,
+      propertyType,
+    };
+    console.log(propertyInformation);
+
+    setContractNumber(" ");
+    form.reset();
+  };
+
   return (
     <>
-      <div className="p-8 card grid grid-cols-5 gap-3 mx-auto">
+      <div className="p-8 bg-gray-200  shadow-xl grid grid-cols-5 gap-3 mx-auto">
         {/* form site */}
-        <div className="col-span-3">
+        <div className="col-span-3 ">
           <h2 className="text-3xl">Property info</h2>
 
-          <form action="">
+          <form onSubmit={handleSubmit}>
             {/* image */}
             <div className="flex items-center justify-center w-full">
               <label
@@ -45,17 +98,48 @@ const AddProperty = () => {
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                     />
                   </svg>
+
+                  <>
+                    {imageInfo ? (
+                      <p className="text-2xl font-bold">
+                        seletedFile:{imageInfo.name}, 😊
+                      </p>
+                    ) : (
+                      <>
+                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                          <span className="font-semibold text-xl">
+                            Click to upload
+                          </span>{" "}
+                          or drag and drop
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          SVG, PNG, JPG or GIF (MAX. 800x400px)
+                        </p>
+                      </>
+                    )}
+                  </>
+
+                  {/* 
                   <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                     <span className="font-semibold text-xl">
                       Click to upload
                     </span>{" "}
                     or drag and drop
                   </p>
+
+                  {imageInfo && <p>seletedFile:{imageInfo.name}</p>}
+
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
+                  </p> */}
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" />
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  name="file"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
               </label>
             </div>
 
@@ -80,6 +164,7 @@ const AddProperty = () => {
               <input
                 type="text"
                 name="location"
+                required
                 placeholder="road,
                 district,country"
                 className="input input-bordered"
@@ -95,6 +180,7 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="bed"
+                  required
                   placeholder="Bed"
                   className="input input-bordered"
                 />
@@ -105,7 +191,7 @@ const AddProperty = () => {
                 </label>
                 <input
                   type="number"
-                  name="Bathroom"
+                  name="bathroom"
                   placeholder="Bathroom"
                   className="input input-bordered"
                 />
@@ -123,7 +209,7 @@ const AddProperty = () => {
               </div>
             </div>
 
-            {/* number and price */}
+            {/* number and price /property type  */}
             <div className="grid grid-cols-3 gap-2">
               {/* phone */}
               <div className="form-control">
@@ -146,19 +232,25 @@ const AddProperty = () => {
                 <input
                   type="text"
                   name="price"
+                  required
                   placeholder="price"
                   className="input input-bordered"
                 />
               </div>
 
+              {/* property type */}
               <div className="mt-9">
-                <select className="py-3 px-4  bg-[#c6c1f9]   block border-gray-200 rounded-full text-sm focus:border-blue-500 ">
-                  <option defaultValue={propertyType}>
-                    Open this select menu
+                <select
+                  className="py-3 px-4  bg-[#c6c1f9]   text-[#1B1A1A]  block border-gray-200 rounded-full text-sm focus:border-blue-500 "
+                  value={propertyType}
+                  required
+                  onChange={(e) => setPropertyType(e.target.value)}
+                >
+                  <option>choose your property type</option>
+                  <option required defaultValue={propertyType}>
+                    Rent
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  <option>Sell</option>
                 </select>
               </div>
             </div>
@@ -179,15 +271,7 @@ const AddProperty = () => {
               ></textarea>
             </div>
 
-            {/* <div className="form-control mt-3">
-              <input
-                className="btn btn-primary"
-                type="submit"
-                value="add property"
-              />
-            </div> */}
-
-            <div className="mt-2  card-actions justify-end">
+            <div className="mt-4  card-actions justify-end">
               {/* accunt role */}
               <div>
                 {/* <div className="form-control w-full max-w-xs">
@@ -205,7 +289,7 @@ const AddProperty = () => {
                 </div> */}
               </div>
 
-              <button className="bg-[#7065F0]  text-white px-6 py-2  rounded-md">
+              <button className="bg-[#7065F0]  text-white px-8 py-2  rounded-md">
                 Submit
               </button>
             </div>

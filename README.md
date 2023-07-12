@@ -2,6 +2,8 @@
 
 this is the link (https://cute-custard-22e2c4.netlify.app/)
 
+this is backend link (" https://estatery-backend-server.vercel.app")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

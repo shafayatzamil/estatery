@@ -12,6 +12,7 @@ const Navbar = () => {
     { to: "sell", name: "Sell" },
     { to: "manageproperty", name: "Manage Property" },
     { to: "resource", name: "Resource" },
+    { to: "addproperty", name: "addproperty" },
   ];
 
   const handleLogOut = () => {

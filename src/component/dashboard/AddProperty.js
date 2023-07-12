@@ -10,7 +10,7 @@ const AddProperty = () => {
   const [contactNumber, setContractNumber] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
   const [imageInfo, setImageInfo] = useState();
-  const [imageURl, setImageURl] = useState("");
+  const [imageURl, setImageURl] = useState();
   // const [seller] = useSeller(user);
 
   const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
@@ -23,12 +23,11 @@ const AddProperty = () => {
   // handle image change
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
     setImageInfo(file);
   };
 
   // handle submit button
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -36,34 +35,77 @@ const AddProperty = () => {
     const formData = new FormData();
     formData.append("image", imageInfo);
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+
+    // const fetchData = async () => {
+    //   const response = await fetch(url, {
+    //     method: "POST",
+    //     body: formData,
+    //   });
+    //   const data = await response.json();
+    //   if (data.success) {
+    //     console.log(data.data.url);
+    //     setImageURl(data.data.url);
+    //     // console.log(imageURl);
+    //     const propertyInformation = {
+    //       name: form.name.value,
+    //       email: user?.email,
+    //       location: form.location.value,
+    //       bed: form.bed.value,
+    //       bathroom: form.bathroom.value,
+    //       squarefit: form.squarefit.value,
+    //       price: form.price.value,
+    //       description: form.description.value,
+    //       contactNumber,
+    //       propertyType,
+    //       imageURl,
+    //     };
+    //     console.log(propertyInformation);
+
+    //     fetch("http://localhost:5000/addproperty", {
+    //       method: "POST",
+    //       headers: {
+    //         "content-type": "application/json",
+    //       },
+    //       body: JSON.stringify(propertyInformation),
+    //     })
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         console.log(data);
+    //       });
+    //   } else {
+    //     console.log("image is not hosted");
+    //   }
+    // };
+    // fetchData();
+
     fetch(url, {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
       .then((imageData) => {
-        console.log(imageData);
+        // console.log(imageData);
         if (imageData.success) {
+          // console.log(imageData.data.url);
           setImageURl(imageData.data.url);
+          const propertyInformation = {
+            name: form.name.value,
+            email: user?.email,
+            location: form.location.value,
+            bed: form.bed.value,
+            bathroom: form.bathroom.value,
+            squarefit: form.squarefit.value,
+            price: form.price.value,
+            description: form.description.value,
+            contactNumber,
+            propertyType,
+            imageURl,
+          };
+          console.log(propertyInformation);
         } else {
           console.log("image cannot host");
         }
       });
-
-    const propertyInformation = {
-      name: form.name.value,
-      email: user?.email,
-      location: form.location.value,
-      bed: form.bed.value,
-      bathroom: form.bathroom.value,
-      squarefit: form.squarefit.value,
-      price: form.price.value,
-      description: form.description.value,
-      contactNumber,
-      propertyType,
-    };
-    console.log(propertyInformation);
-
     setContractNumber(" ");
     form.reset();
   };
@@ -152,7 +194,7 @@ const AddProperty = () => {
                 type="text"
                 name="name"
                 placeholder="Property Name"
-                className="input input-bordered"
+                className="input input-bordered font-bold"
               />
             </div>
 
@@ -164,7 +206,6 @@ const AddProperty = () => {
               <input
                 type="text"
                 name="location"
-                required
                 placeholder="road,
                 district,country"
                 className="input input-bordered"
@@ -180,7 +221,6 @@ const AddProperty = () => {
                 <input
                   type="number"
                   name="bed"
-                  required
                   placeholder="Bed"
                   className="input input-bordered"
                 />
@@ -232,7 +272,6 @@ const AddProperty = () => {
                 <input
                   type="text"
                   name="price"
-                  required
                   placeholder="price"
                   className="input input-bordered"
                 />
@@ -247,9 +286,7 @@ const AddProperty = () => {
                   onChange={(e) => setPropertyType(e.target.value)}
                 >
                   <option>choose your property type</option>
-                  <option required defaultValue={propertyType}>
-                    Rent
-                  </option>
+                  <option defaultValue={propertyType}>Rent</option>
                   <option>Sell</option>
                 </select>
               </div>

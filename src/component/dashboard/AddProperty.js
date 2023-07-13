@@ -4,16 +4,15 @@ import useSeller from "../hooks/useSeller";
 import Navbar from "../shared/Navbar";
 import PhoneInput from "react-phone-number-input";
 import addPropertyIcons from "../../assets/images/property_9202471.png";
+import toast from "react-hot-toast";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
   const [contactNumber, setContractNumber] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
   const [imageInfo, setImageInfo] = useState();
-  const [imageURl, setImageURl] = useState();
-  // const [seller] = useSeller(user);
 
-  const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
+  // const [seller] = useSeller(user);
 
   // handle phone number change
   const handlePhoneNumberChange = (value) => {
@@ -27,11 +26,31 @@ const AddProperty = () => {
   };
 
   // handle submit button
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
+    const location = form.location.value;
+    const bed = form.bed.value;
+    const bathroom = form.bathroom.value;
+    const squarefit = form.squarefit.value;
+    const number = contactNumber;
+    const price = form.price.value;
+    const description = form.description.value;
+
+    console.log(
+      name,
+      location,
+      bed,
+      bathroom,
+      squarefit,
+      number,
+      price,
+      description
+    );
 
     // imageHosting
+    const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
     const formData = new FormData();
     formData.append("image", imageInfo);
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
@@ -84,23 +103,46 @@ const AddProperty = () => {
     })
       .then((res) => res.json())
       .then((imageData) => {
-        // console.log(imageData);
+        console.log(imageData);
         if (imageData.success) {
-          // console.log(imageData.data.url);
-          setImageURl(imageData.data.url);
+          // imageurl take after hoasting
+          const imageURl = imageData.data.url;
+
+          // property information
           const propertyInformation = {
-            name: form.name.value,
-            email: user?.email,
-            location: form.location.value,
-            bed: form.bed.value,
-            bathroom: form.bathroom.value,
-            squarefit: form.squarefit.value,
-            price: form.price.value,
-            description: form.description.value,
-            contactNumber,
-            propertyType,
+            email: user.email,
             imageURl,
+            name,
+            location,
+            bed,
+            bathroom,
+            squarefit,
+            number,
+            price,
+            propertyType,
+            description,
           };
+
+          // property information send to the backend
+          fetch("http://localhost:5000/addproperty", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(propertyInformation),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              toast(`${data.message}`, {
+                icon: "✔",
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
+            });
+
           console.log(propertyInformation);
         } else {
           console.log("image cannot host");

@@ -38,65 +38,13 @@ const AddProperty = () => {
     const price = form.price.value;
     const description = form.description.value;
 
-    console.log(
-      name,
-      location,
-      bed,
-      bathroom,
-      squarefit,
-      number,
-      price,
-      description
-    );
-
     // imageHosting
     const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
     const formData = new FormData();
     formData.append("image", imageInfo);
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
 
-    // const fetchData = async () => {
-    //   const response = await fetch(url, {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-    //   const data = await response.json();
-    //   if (data.success) {
-    //     console.log(data.data.url);
-    //     setImageURl(data.data.url);
-    //     // console.log(imageURl);
-    //     const propertyInformation = {
-    //       name: form.name.value,
-    //       email: user?.email,
-    //       location: form.location.value,
-    //       bed: form.bed.value,
-    //       bathroom: form.bathroom.value,
-    //       squarefit: form.squarefit.value,
-    //       price: form.price.value,
-    //       description: form.description.value,
-    //       contactNumber,
-    //       propertyType,
-    //       imageURl,
-    //     };
-    //     console.log(propertyInformation);
-
-    //     fetch("http://localhost:5000/addproperty", {
-    //       method: "POST",
-    //       headers: {
-    //         "content-type": "application/json",
-    //       },
-    //       body: JSON.stringify(propertyInformation),
-    //     })
-    //       .then((res) => res.json())
-    //       .then((data) => {
-    //         console.log(data);
-    //       });
-    //   } else {
-    //     console.log("image is not hosted");
-    //   }
-    // };
-    // fetchData();
-
+    // fetch the hoasting
     fetch(url, {
       method: "POST",
       body: formData,
@@ -107,6 +55,7 @@ const AddProperty = () => {
         if (imageData.success) {
           // imageurl take after hoasting
           const imageURl = imageData.data.url;
+          console.log(imageURl);
 
           // property information
           const propertyInformation = {

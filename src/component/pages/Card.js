@@ -1,6 +1,20 @@
 import React from "react";
 
-const Card = () => {
+import HouseIamge from "../../assets/images/house1.jpg";
+
+const Card = ({ singleProperty }) => {
+  const {
+    name,
+    imageURl,
+    location,
+    bed,
+    bathroom,
+    squarefit,
+    number,
+    price,
+    propertyType,
+    description,
+  } = singleProperty;
   return (
     <div>
       <div className="card  bg-base-100 shadow-xl">
@@ -11,7 +25,7 @@ const Card = () => {
           <div className="flex justify-between items-center">
             <div>
               <span className="text-[#7065F0] text-xl font-semibold">
-                $2,095
+                ${price}
               </span>
               <span>/month</span>
             </div>
@@ -33,8 +47,8 @@ const Card = () => {
             </div>
           </div>
 
-          <h2 className="card-title text-black">Palm Harbor</h2>
-          <p className="text-gray-400">2699 Green Valley, Highland Lake, FL</p>
+          <h2 className="card-title text-black">{name}</h2>
+          <p className="text-gray-400">{location.slice(0, 40)}...</p>
 
           <hr className="mt-4" />
 
@@ -59,7 +73,7 @@ const Card = () => {
                 />
               </svg>
 
-              <p className="">4 Beds</p>
+              <p className="">{bed} Beds</p>
             </div>
             <div className="flex gap-2">
               <svg
@@ -76,7 +90,7 @@ const Card = () => {
                   d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
                 />
               </svg>
-              <p>2 Bathrooms</p>
+              <p>{bathroom} Bathrooms</p>
             </div>
             <div className="flex gap-2">
               <svg
@@ -94,7 +108,7 @@ const Card = () => {
                 />
               </svg>
 
-              <p>6x8 m²</p>
+              <p>{squarefit} m²</p>
             </div>
           </div>
         </div>

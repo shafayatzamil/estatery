@@ -1,6 +1,8 @@
 import Main from "../Layout/Main";
 import AddProperty from "../dashboard/AddProperty";
+import CardDetails from "../pages/CardDetails";
 import Rent from "../pages/Rent";
+import Sell from "../pages/Sell";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Register from "../pages/login/Register";
@@ -27,6 +29,24 @@ const router = createBrowserRouter([
       {
         path: "/rent",
         element: <Rent></Rent>,
+      },
+      {
+        path: "/rent/:id",
+        element: <CardDetails></CardDetails>,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/rent/${params.id}`);
+        },
+      },
+      {
+        path: "/sell",
+        element: <Sell></Sell>,
+      },
+      {
+        path: "/sell/:id",
+        element: <CardDetails></CardDetails>,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/sell/${params.id}`);
+        },
       },
     ],
   },

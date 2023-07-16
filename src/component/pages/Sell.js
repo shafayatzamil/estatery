@@ -10,7 +10,6 @@ const Sell = () => {
       .then((res) => res.json())
       .then((data) => {
         setSellProperty(data.data);
-        console.log(data.data);
       });
   }, []);
   return (

@@ -17,7 +17,6 @@ const Card = ({ singleProperty }) => {
     propertyType,
     description,
   } = singleProperty;
-  console.log(_id);
   return (
     <div>
       <Link to={`/${singleProperty.propertyType}/${singleProperty._id}`}>
@@ -52,7 +51,7 @@ const Card = ({ singleProperty }) => {
             </div>
 
             <h2 className="card-title text-black">{name}</h2>
-            <p className="text-gray-400">{location.slice(0, 40)}...</p>
+            <p className="text-gray-400">{location.slice(0, 30)}...</p>
 
             <hr className="mt-4" />
 
@@ -108,7 +107,7 @@ const Card = ({ singleProperty }) => {
                   />
                 </svg>
 
-                <p>{squarefit} m²</p>
+                <p>{parseFloat(squarefit)} m²</p>
               </div>
             </div>
           </div>

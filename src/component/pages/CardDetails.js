@@ -57,36 +57,22 @@ const CardDetails = () => {
             <h2 className="text-3xl font-semibold py-2 mb-2">{name}</h2>
             <p className="mb-3">{location}</p>
           </div>
-          <div className="flex  gap-4">
+          <div className="flex  gap-4 text-[#7065F0]">
             <div className="border rounded-md px-4 py-2">
               <button className="flex justify-around items-center gap-2">
-                <Share2 size={20} color="#4f5459" strokeWidth={1.25} />
+                <Share2 size={20} color="#7065F0" strokeWidth={1.25} />
                 Share
               </button>
             </div>
             <div className="border rounded-md px-4 py-2">
               <button className="flex justify-around items-center gap-2">
-                <Heart size={20} color="#4f5459" strokeWidth={1.25} />
+                <Heart size={20} color="#7065F0" strokeWidth={1.25} />
                 Favorite
               </button>
             </div>
             <div className="border rounded-md px-4 py-2">
               <button className="flex justify-around items-center gap-2">
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
-                </svg> */}
-                <Search size={20} color="#4f5459" strokeWidth={1.25} />
+                <Search size={20} color="#7065F0" strokeWidth={1.25} />
                 Browse Nearby Listing
               </button>
             </div>

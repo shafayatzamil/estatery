@@ -22,7 +22,7 @@ const Card = ({ singleProperty }) => {
       <Link to={`/${singleProperty.propertyType}/${singleProperty._id}`}>
         <div className="card  bg-base-100 shadow-xl">
           <figure>
-            <img src={HouseIamge} alt="Shoes" />
+            <img src={imageURl ? imageURl : HouseIamge} alt="Shoes" />
           </figure>
           <div className="card-body">
             <div className="flex justify-between items-center">

@@ -5,12 +5,13 @@ import Navbar from "../shared/Navbar";
 import PhoneInput from "react-phone-number-input";
 import addPropertyIcons from "../../assets/images/property_9202471.png";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
   const [contactNumber, setContractNumber] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
-  const [imageInfo, setImageInfo] = useState();
+  const [imageInfo, setImageInfo] = useState("");
 
   // const [seller] = useSeller(user);
 
@@ -20,9 +21,16 @@ const AddProperty = () => {
   };
 
   // handle image change
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
+    // for (let i = 0; i < event.target.files.length; i++) {
+    //   const newImage = event.target.files[i];
+    //   newImage["id"] = Math.random();
+    //   setImageInfo((prevState) => [...prevState, newImage]);
+    // }
+    // console.log(imageInfo);
     const file = event.target.files[0];
-    setImageInfo(file);
+    const base64 = await convertToBase64(file);
+    setImageInfo(base64);
   };
 
   // handle submit button
@@ -37,68 +45,88 @@ const AddProperty = () => {
     const number = contactNumber;
     const price = form.price.value;
     const description = form.description.value;
+    const imageURl = imageInfo;
 
     // imageHosting
-    const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
-    const formData = new FormData();
-    formData.append("image", imageInfo);
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    // const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
+    // const formData = new FormData();
+    // formData.append("image", imageInfo);
+    // const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
 
     // fetch the hoasting
-    fetch(url, {
+    // fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((imageData) => {
+    //     console.log(imageData);
+    //     if (imageData.success) {
+    // imageurl take after hoasting
+    // const imageURl = imageData.data.url;
+    // console.log(imageURl);
+
+    // property information
+    const propertyInformation = {
+      email: user?.email,
+      imageURl,
+      name,
+      location,
+      bed,
+      bathroom,
+      squarefit,
+      number,
+      price,
+      propertyType,
+      description,
+    };
+
+    // // axious set
+    // axios
+    //   .post("http://localhost:5000/addproperty", { propertyInformation })
+    //   .then((res) => console.log(res))
+    //   .catch((error) => console.log(error));
+
+    // property information send to the backend
+    fetch("http://localhost:5000/addproperty", {
       method: "POST",
-      body: formData,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(propertyInformation),
     })
       .then((res) => res.json())
-      .then((imageData) => {
-        console.log(imageData);
-        if (imageData.success) {
-          // imageurl take after hoasting
-          const imageURl = imageData.data.url;
-          console.log(imageURl);
-
-          // property information
-          const propertyInformation = {
-            email: user.email,
-            imageURl,
-            name,
-            location,
-            bed,
-            bathroom,
-            squarefit,
-            number,
-            price,
-            propertyType,
-            description,
-          };
-
-          // property information send to the backend
-          fetch("http://localhost:5000/addproperty", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(propertyInformation),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              toast(`${data.message}`, {
-                icon: "✔",
-                style: {
-                  borderRadius: "10px",
-                  background: "#333",
-                  color: "#fff",
-                },
-              });
-            });
-
-          console.log(propertyInformation);
-        } else {
-          console.log("image cannot host");
-        }
+      .then((data) => {
+        toast(`${data.message}`, {
+          icon: "✔",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
+
+    console.log(propertyInformation);
+    //   } else {
+    //     console.log("image cannot host");
+    //   }
+    // });
     setContractNumber(" ");
     form.reset();
+  };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
   return (
@@ -133,9 +161,9 @@ const AddProperty = () => {
                   </svg>
 
                   <>
-                    {imageInfo ? (
+                    {imageInfo?.length ? (
                       <p className="text-2xl font-bold">
-                        seletedFile:{imageInfo.name}, 😊
+                        seletedFile:{imageInfo.name},
                       </p>
                     ) : (
                       <>
@@ -151,25 +179,12 @@ const AddProperty = () => {
                       </>
                     )}
                   </>
-
-                  {/* 
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold text-xl">
-                      Click to upload
-                    </span>{" "}
-                    or drag and drop
-                  </p>
-
-                  {imageInfo && <p>seletedFile:{imageInfo.name}</p>}
-
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p> */}
                 </div>
                 <input
                   id="dropzone-file"
                   type="file"
                   name="file"
+                  multiple
                   onChange={handleFileChange}
                   className="hidden"
                 />
@@ -277,8 +292,8 @@ const AddProperty = () => {
                   onChange={(e) => setPropertyType(e.target.value)}
                 >
                   <option>choose your property type</option>
-                  <option defaultValue={propertyType}>Rent</option>
-                  <option>Sell</option>
+                  <option defaultValue={propertyType}>rent</option>
+                  <option>sell</option>
                 </select>
               </div>
             </div>

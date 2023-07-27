@@ -21,8 +21,6 @@ import {
 
 const CardDetails = () => {
   const singleProperty = useLoaderData();
-  const browseLocation = document.location.href;
-  console.log(browseLocation.split("/")[3]);
 
   const {
     _id,
@@ -37,7 +35,6 @@ const CardDetails = () => {
     propertyType,
     description,
   } = singleProperty.data;
-
   return (
     <div>
       {/* card details page */}
@@ -133,9 +130,11 @@ const CardDetails = () => {
               <span>/month</span>
             </div>
 
-            <button className="bg-[#7065F0]  text-center px-10 py-3 mt-2 text-white font-medium   rounded-md">
-              Apply Now
-            </button>
+            <Link to={`/tenecy/${propertyType}/${_id}`}>
+              <button className="bg-[#7065F0]  text-center px-10 py-3 mt-2 text-white font-medium   rounded-md">
+                Apply Now
+              </button>
+            </Link>
           </div>
         </div>
 

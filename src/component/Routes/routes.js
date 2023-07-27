@@ -1,8 +1,10 @@
 import Main from "../Layout/Main";
 import AddProperty from "../dashboard/AddProperty";
 import CardDetails from "../pages/CardDetails";
+import PaymentSuccess from "../pages/PaymentSuccess";
 import Rent from "../pages/Rent";
 import Sell from "../pages/Sell";
+import TenecyApplication from "../pages/TenecyApplication";
 import ErrorPage from "../pages/errorpage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "/tenecy/:propertyType/:id",
+        element: <TenecyApplication></TenecyApplication>,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/rent/${params.id}`);
+        },
+      },
+
+      {
         path: "/sell",
         element: <Sell></Sell>,
       },
@@ -49,6 +59,11 @@ const router = createBrowserRouter([
         loader: ({ params }) => {
           return fetch(`http://localhost:5000/sell/${params.id}`);
         },
+      },
+
+      {
+        path: "/payment/success/:trainid",
+        element: <PaymentSuccess />,
       },
     ],
   },

@@ -56,18 +56,18 @@ const Login = () => {
   return (
     <>
       <div className=" p-12">
-        <div className="flex bg-white h-5/6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 bg-white h-5/6">
           {/* loginImage */}
-          <div className="bg-[#2f5cbe] p-16 ">
+          <div className="bg-[#2f5cbe] p-16 hidden md:block lg:block ">
             <img src={loginImage} alt="" />
           </div>
 
           {/* form */}
           <div className=" mx-auto ">
-            <h1 className="text-5xl text-center font-bold pt-12">
+            <h1 className="text-3xl lg:text-5xl  text-center font-bold pt-12">
               Hello Again
             </h1>
-            <p className="text-center text-gray-400 mt-2">
+            <p className="text-center text-sm p-1 text-gray-400 mt-2">
               Lorem, ipsum dolor sit amet consectetur adipisicing
             </p>
             <form className="card-body" onSubmit={handleSubmit}>

@@ -1,19 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faEnvelope, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [nav, setnav] = useState(false);
 
   const links = [
     { to: "rent", name: "Rent" },
-    { to: "buy", name: "Buy" },
     { to: "sell", name: "Sell" },
     { to: "manageproperty", name: "Manage Property" },
-    { to: "resource", name: "Resource" },
     { to: "addproperty", name: "addproperty" },
   ];
+
+  const toggleNav = () => {
+    setnav(!nav);
+  };
 
   const handleLogOut = () => {
     logOut()
@@ -26,31 +31,33 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex gap-10 items-center justify-between p-4 bg-violet-100">
+      <nav className="flex flex-col md:flex-col lg:flex-row md:items-center  gap-10 items-center justify-between p-4 bg-violet-100">
         {/* navbar link */}
-        <div className="flex justify-center items-center  gap-4 mx-8">
-          <Link to="/">
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
+        <div className="flex flex-col md:flex-col lg:flex-row  justify-center items-center  gap-4 mx-8">
+          <div className="flex  gap-32 justify-around">
+            <Link to="/">
+              <div className="">
+                <FontAwesomeIcon
+                  icon={faEnvelope}
+                  beatFade
+                  size="lg"
+                  style={{ color: "#4f6da1" }}
                 />
-              </svg>
-              <span className="font-bold text-xl tracking-tight text-primary-light font-kumbh-sans cursor-pointer mr-4">
-                Estatery
-              </span>
-            </div>
-          </Link>
-          <ul className="flex gap-6 justify-center items-center text-base ">
+                <span className="font-bold text-xl tracking-tight text-primary-light font-kumbh-sans cursor-pointer mr-4">
+                  Estatery
+                </span>
+              </div>
+            </Link>
+
+            <span
+              onClick={toggleNav}
+              className="justify-self-end md:hidden lg:hidden"
+            >
+              <FontAwesomeIcon icon={nav == true ? faXmark : faBars} />
+            </span>
+          </div>
+
+          <ul className="flex lg:flex-row md:flex-col flex-col  gap-6 justify-center items-center text-base ">
             {links.map(({ to, name }) => (
               <Link to={to} key={name} className="nav-link">
                 {name}

@@ -1,6 +1,15 @@
 import React from "react";
 
 import HouseIamge from "../../../assets/images/house2.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBed,
+  faHandshake,
+  faKey,
+  faSquare,
+  faStamp,
+  faToilet,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Properties = () => {
   return (
@@ -10,79 +19,81 @@ const Properties = () => {
         <p className="mt-2">Some of our picked properties near you location.</p>
       </div>
 
-      <div className="flex justify-between px-16 py-8">
-        <div className="px-4 py-2 rounded-md bg-[#E0DEF7]">
+      <div className="  grid grid-cols-2   justify-items-start px-8 md:px-16  lg:px-16 py-8">
+        <div className="px-4 grid grid-cols-3 py-2 rounded-md bg-[#E0DEF7]">
           <button className="btn text-[#7065F0]">
             {" "}
             <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#7065F0"
-                className="w-4 h-4 inline"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
-                />
-              </svg>
+              <FontAwesomeIcon
+                icon={faKey}
+                style={{ color: "#4f6da1" }}
+                flip
+                size="sm"
+                // className="hidden md:block lg:block"
+              />
             </span>
             Rent
           </button>
           <button className="mx-4">
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#7065F0"
-                className="w-4 h-4 inline"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                />
-              </svg>
+            <span className="m-1">
+              <FontAwesomeIcon
+                icon={faHandshake}
+                style={{ color: "#4f6da1" }}
+                size="sm"
+                // className="hidden md:block lg:block"
+              />
             </span>
             Buy
           </button>
           <button className="">
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#7065F0"
-                className="w-4 h-4 inline"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                />
-              </svg>
+            <span className="m-1">
+              <FontAwesomeIcon
+                icon={faStamp}
+                style={{ color: "#4f6da1" }}
+                size="sm"
+                // className="hidden md:block lg:block"
+              />
             </span>
             Sell
           </button>
         </div>
-        <div className="form-control">
-          <input
+        <div className="form-control justify-self-end">
+          {/* <input
             type="text"
             placeholder="Search"
             className="input input-bordered w-24 md:w-auto"
-          />
+          /> */}
+          <div className="form-control">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="location"
+                className="input input-bordered hidden md:hidden lg:block"
+              />
+              <button className="btn btn-square bg-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6  "
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* card section */}
 
-      <div className="px-16 py-8 grid grid-cols-3 gap-6">
+      <div className="px-16 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="card  bg-base-100 shadow-xl">
           <figure>
             <img src={HouseIamge} alt="Shoes" />
@@ -120,62 +131,34 @@ const Properties = () => {
 
             <hr className="mt-4" />
 
-            {/* <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div> */}
-
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className=" flex items-center  gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex  items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>2 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
+              <div className="flex  items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>6x8 m²</p>
               </div>
             </div>
@@ -218,58 +201,34 @@ const Properties = () => {
 
             <hr className="mt-4" />
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>2 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
-                <p>6x7.5 m²</p>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
+                <p>6x7.5m²</p>
               </div>
             </div>
           </div>
@@ -312,57 +271,33 @@ const Properties = () => {
             <hr className="mt-4" />
 
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>3 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>8x10 m²</p>
               </div>
             </div>
@@ -406,57 +341,33 @@ const Properties = () => {
             <hr className="mt-4" />
 
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>3 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>8x10 m²</p>
               </div>
             </div>
@@ -500,57 +411,33 @@ const Properties = () => {
             <hr className="mt-4" />
 
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  className=" hidden md:hidden lg:block"
+                  size="sm"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  className=" hidden md:hidden lg:block"
+                  size="sm"
+                />
                 <p>3 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>8x10 m²</p>
               </div>
             </div>
@@ -594,57 +481,33 @@ const Properties = () => {
             <hr className="mt-4" />
 
             <div className="flex justify-between">
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faBed}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p className="">4 Beds</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faToilet}
+                  style={{ color: "#4f6da1" }}
+                  fade
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>3 Bathrooms</p>
               </div>
-              <div className="flex gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-
+              <div className="flex items-center gap-1">
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  style={{ color: "#4f6da1" }}
+                  size="sm"
+                  className=" hidden md:hidden lg:block"
+                />
                 <p>8x10 m²</p>
               </div>
             </div>
@@ -655,7 +518,7 @@ const Properties = () => {
       {/* browse more Properties */}
 
       <div className="flex justify-center items-center my-4">
-        <button className="bg-[#100A55] font-semibold  text-white px-4 py-2 rounded-md ">
+        <button className="bg-[#100A55] font-semibold  text-white px-6 py-3 rounded-md ">
           Browse more properties
         </button>
       </div>

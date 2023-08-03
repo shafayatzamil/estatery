@@ -2,15 +2,16 @@ import React from "react";
 
 const EasyTanent = () => {
   return (
-    <div className="bg-[#100A55] text-white px-16 py-12 ">
-      <div className="flex justify-between mb-6">
+    <div className="bg-[#100A55] mt-12 text-white px-16 py-12 ">
+      {/* <div className="flex justify-between mb-6"> */}
+      <div className="grid  grid-cols-1 gap-3 lg:grid-cols-2 mb-6">
         <h2 className="text-3xl font-semibold">
           We make it easy for <br />{" "}
           <span className="text-[#7065F0]">tenants</span> and{" "}
           <span className="text-[#7065F0]">landlords</span>
         </h2>
 
-        <p className="text-gray-300 font-semibold mr-12">
+        <p className="text-gray-300 font-semibold  text-sm ">
           Whether it’s selling your current home, getting <br /> financing, or
           buying a new home, we make it easy and <br /> efficient. The best
           part? you’ll save a bunch of money <br /> and time with our services.
@@ -18,7 +19,7 @@ const EasyTanent = () => {
       </div>
 
       {/* 3 section box */}
-      <div className="flex gap-4 justify-between ">
+      <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="flex gap-2 p-4 bg-[#403b77] rounded-md">
           <div className=" ">
             <svg
@@ -105,18 +106,25 @@ const EasyTanent = () => {
 
       <hr className="mt-12 " />
 
-      <div className="flex justify-around my-12">
-        <div className="border-r-4 border-indigo-500 ">
-          <h2 className="text-4xl font-bold">7.4%</h2>
-          <p className="text-gray-400 mr-12">Property Return Rate</p>
+      {/* <div className="flex justify-around my-12"> */}
+      <div className="grid   grid-cols-3  gap-12 my-12  ">
+        <div className="border-0  lg:border-r-4  border-indigo-500 ">
+          <h2 className="text-xl md:text-2xl  lg:text-4xl  font-bold">7.4%</h2>
+          <p className="text-gray-400 text-xs md:text-sm lg:text-md   mr-12">
+            Property Return Rate
+          </p>
         </div>
-        <div className="border-r-4 border-indigo-500 ">
-          <h2 className="text-4xl font-bold">3,856</h2>
-          <p className="text-gray-400 mr-12">Property in Sell & Rent</p>
+        <div className="  border-0 lg:border-r-4 border-indigo-500 ">
+          <h2 className="text-xl md:text-2xl  lg:text-4xl  font-bold">3,856</h2>
+          <p className="text-gray-400 text-xs md:text-sm lg:text-md mr-12">
+            Property in Sell & Rent
+          </p>
         </div>
-        <div className="">
-          <h2 className="text-4xl font-bold">2,540</h2>
-          <p className="text-gray-400 ">Daily Completed Transactions</p>
+        <div className=" ">
+          <h2 className="text-xl md:text-2xl  lg:text-4xl font-bold">2,540</h2>
+          <p className="text-gray-400 text-xs md:text-sm lg:text-md">
+            Daily Completed Transactions
+          </p>
         </div>
       </div>
     </div>

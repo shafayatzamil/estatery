@@ -100,25 +100,25 @@ const Register = () => {
 
   return (
     <div className="mt-6 p-12">
-      <div className="flex bg-white">
-        {/* loginImage */}
-        <div className="bg-[#2f5cbe]   p-12">
+      <div className="grid grid-cols-2  bg-white">
+        {/* register image */}
+        <div className="bg-[#2f5cbe] hidden md:block lg:block   p-12">
           <img src={loginImage} className="" alt="" />
         </div>
 
         {/* form */}
-        <div className=" mx-auto ">
-          <h1 className="text-5xl text-center font-bold pt-12">
+        <div className=" mx-auto  ">
+          <h1 className=" text-3xl lg:text-5xl text-center font-bold pt-12">
             Please register!
           </h1>
-          <p className="text-center text-blue-400 mt-2">
+          <p className=" text-center text-sm text-blue-400 mt-2">
             Are you a Buyyer ,Seller or Rent the house?
           </p>
 
           {/* sign up form */}
-          <form className="card-body" onSubmit={handleSubmit}>
+          <form className="" onSubmit={handleSubmit}>
             {/* NAME */}
-            <div className="form-control">
+            <div className="md:form-control px-4">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
@@ -132,7 +132,7 @@ const Register = () => {
             </div>
 
             {/* EMAIL */}
-            <div className="form-control">
+            <div className="md:form-control px-4">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
@@ -145,10 +145,10 @@ const Register = () => {
               />
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex">
               {/* PHONE */}
               <div>
-                <div className="form-control">
+                <div className="md:form-control px-4">
                   <label className="label">
                     <span className="label-text">phone</span>
                   </label>
@@ -164,9 +164,11 @@ const Register = () => {
 
               {/* accunt role */}
               <div>
-                <div className="form-control w-full max-w-xs">
+                <div className="md:form-control px-4">
                   <label className="label">
-                    <span className="label-text">seller or buyer and rent</span>
+                    <span className="text-xs lg:text-sm">
+                      seller or buyer and rent
+                    </span>
                   </label>
                   <select
                     className="select select-bordered"
@@ -182,7 +184,7 @@ const Register = () => {
             </div>
 
             {/* PASSWORD */}
-            <div className="form-control ">
+            <div className="md:form-control mb-6 px-4 ">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
@@ -195,7 +197,7 @@ const Register = () => {
               />
             </div>
 
-            <div className="form-control mt-3">
+            <div className=" md:form-control  px-4 ">
               <input
                 className="btn btn-primary"
                 type="submit"

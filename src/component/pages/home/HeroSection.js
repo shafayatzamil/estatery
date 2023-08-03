@@ -1,14 +1,17 @@
 import React from "react";
-
-import House from "../../../assets/images/house1.jpg";
+import House from "../../../assets/images/house2.jpg";
+import userimage from "../../../assets/images/userimage.jpg";
+import userimage1 from "../../../assets/images/zamil.jpg";
+import { faBuildingUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HeroSection = () => {
   return (
     <div className="pt-12 mx-auto bg-gradient-to-b from-violet-200 to-violet-100">
-      <div className=" grid grid-cols-2  mx-auto">
+      <div className=" grid  lg:grid-cols-2 sm:grid-cols-1  gap-2 mx-auto">
         {/* written section */}
-        <div className="ml-16">
-          <h2 className="text-5xl font-bold text-[#000929]">
+        <div className=" m-6 md:ml-16lg:ml-16 p-2">
+          <h2 className="text-5xl  font-bold text-[#000929]">
             Buy, rent, or sell
             <br />
             your property
@@ -21,54 +24,85 @@ const HeroSection = () => {
             without any commisions.
           </p>
 
-          <div className=" mb-6">
-            <button className="bg-white  rounded-s-md px-4 py-1">Rent</button>
-            <button className="bg-white rounded-sm px-4 py-1">Buy</button>
-            <button className="bg-white rounded-e-md px-4 py-1 ">Sell</button>
+          <div className="">
+            <button className="bg-white  rounded-s-md px-6 py-2 border-b-2 border-indigo-500">
+              Rent
+            </button>
+            <button className="bg-white rounded-sm px-6 py-2">Buy</button>
+            <button className="bg-white rounded-e-md px-6 py-2 ">Sell</button>
+          </div>
+          {/* drowpdown button */}
+          <div className="bg-slate-50 mb-8  hidden md:hidden lg:grid grid-cols-3 p-4 rounded-md ">
+            <div>
+              <h2 className="text-sm  text-gray-400 ">Location</h2>
+              <p className="font-bold text-sm ">Barcelona, Spain</p>
+            </div>
+            <div>
+              <h2 className="text-sm  text-gray-400 ">When</h2>
+              <p className="font-bold text-sm ">Select Move-in Date</p>
+            </div>
+            <div>
+              <button className="text-sm  bg-[#7065F0] text-white px-5 py-3 rounded-lg">
+                Browse Properties
+              </button>
+            </div>
+          </div>
+
+          {/* mobile responsive search */}
+          <div className="block md:hidden lg:hidden mb-6 ">
+            <div className="form-control ">
+              <div className="input-group">
+                <input
+                  type="text"
+                  placeholder="Search…"
+                  className="input input-bordered w-48"
+                />
+                <button className="btn btn-square bg-[#7065F0]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* icons */}
-          <div className=" flex gap-12">
-            <div className="">
-              <span className="  mt-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-12 h-12 p-2 ring-2 bg-gray-200 ring-blue-500/50 rounded-full"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-                  />
-                </svg>
+          <div className=" flex items-center gap-12 mb-12">
+            <div className="mt-4">
+              <span className=" border-2 rounded-3xl  py-4 px-2 border-indigo-300  mt-6">
+                <FontAwesomeIcon
+                  icon={faUsers}
+                  shake
+                  size="xl"
+                  style={{ color: "#4f6da1" }}
+                />
               </span>
-              <h4 className="text-xl font-semibold text-[#7065F0]">
+              <h4 className="text-xl mt-4 font-semibold text-[#7065F0]">
                 50k+ renters
               </h4>
               <p>believe in our service</p>
             </div>
-            <div className="">
-              <span className="  mt-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#7065F0"
-                  className="w-12 h-12 p-2 ring-2 bg-[#E0DEF7] ring-blue-500/50 rounded-full"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
-                  />
-                </svg>
+            <div className="mt-4">
+              <span className="  border-2 rounded-3xl  py-4 px-2 border-indigo-300  mt-6">
+                <FontAwesomeIcon
+                  icon={faBuildingUser}
+                  shake
+                  size="xl"
+                  style={{ color: "#4f6da1" }}
+                />
               </span>
-              <h4 className="text-xl font-semibold text-[#7065F0]">
+              <h4 className="text-xl mt-4 font-semibold text-[#7065F0]">
                 10k+ properties
               </h4>
               <p>and house ready for occupancy</p>
@@ -76,20 +110,23 @@ const HeroSection = () => {
           </div>
         </div>
         {/* image section */}
-        <div className="">
-          <img src={House} className="relative " alt="" />
+        <div className="relative lg:block md:hidden hidden ">
+          <div className="absolute bottom-0 ">
+            <img src={House} className="w-full" alt="" />
+          </div>
 
-          {/* <div className=" absolute right-12 bottom-72 bg-[#023047] h-22 w-52 p-4">
-            <div className="flex justify-between gap-4">
-              <h2 className="text-white">Excellent</h2>
+          {/* excilence section */}
+          <div className=" absolute bottom-0  overflow-hidden right-0 rounded-tl-lg  bg-[#023047] h-22 w-48 p-4">
+            <div className="flex justify-between gap-4 text-center">
+              <h2 className="text-gray-200 font-semibold text-sm">Excellent</h2>
               <p className="text-white flex">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#00b4d8"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                 stroke="#7065F0"
-                  className="w-6 h-6"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -97,7 +134,7 @@ const HeroSection = () => {
                     d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
                   />
                 </svg>
-                <span className="">Trustpilot</span>
+                <span className="text-xs">Trustpilot</span>
               </p>
             </div>
 
@@ -107,9 +144,9 @@ const HeroSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffb703"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                 stroke="#7065F0"
-                  className="w-6 h-6"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -123,9 +160,9 @@ const HeroSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffb703"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                 stroke="#7065F0"
-                  className="w-6 h-6"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -139,9 +176,9 @@ const HeroSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffb703"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                 stroke="#7065F0"
-                  className="w-6 h-6"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -155,9 +192,25 @@ const HeroSection = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffb703"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                 stroke="#7065F0"
-                  className="w-6 h-6"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                  />
+                </svg>
+              </p>
+              <p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#ffb703"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1}
+                  stroke="#7065F0"
+                  className="w-4 h-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -168,8 +221,44 @@ const HeroSection = () => {
               </p>
             </div>
 
-            <p className="text-white mt-4">From 3,264 reviews</p>
-          </div> */}
+            <p className="text-white mt-4 text-xs">From 3,264 reviews</p>
+          </div>
+
+          {/* users Section */}
+          <div className=" absolute top-0 left-1  bg-slate-100 p-6 rounded-lg">
+            <div>
+              <div className="flex gap-2 ">
+                <div className="">
+                  <img src={userimage1} className="w-16  rounded-full" alt="" />
+                </div>
+                <div>
+                  <h2 className="text-xl  font-bold">Shafayat zamil</h2>
+                  <p className="text-xs text-gray-400">Renter</p>
+                  <div className="flex gap-2">
+                    <p className="text-sm text-gray-400 ">Moved with</p>
+                    <p className="text-primary-light font-bold">Estatery</p>
+                  </div>
+                </div>
+              </div>
+              <p className="my-2 text-sm">
+                I loved how smooth the move <br /> was, and finally got the
+                house <br /> we wanted.
+              </p>
+
+              <hr />
+
+              <div className="flex justify-between items-center mt-4 ">
+                <div>
+                  <h2 className="text-xl font-bold ">$1,500</h2>
+                  <p className="text-xs">Saved up to</p>
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold">-24 hrs</h2>
+                  <p className="text-xs">Process time</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

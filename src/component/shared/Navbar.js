@@ -7,7 +7,7 @@ import { faBars, faEnvelope, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [nav, setnav] = useState(false);
+  const [nav, setNav] = useState(false);
 
   const links = [
     { to: "rent", name: "Rent" },
@@ -17,7 +17,7 @@ const Navbar = () => {
   ];
 
   const toggleNav = () => {
-    setnav(!nav);
+    setNav(!nav);
   };
 
   const handleLogOut = () => {
@@ -53,22 +53,23 @@ const Navbar = () => {
               onClick={toggleNav}
               className="justify-self-end md:hidden lg:hidden"
             >
-              <FontAwesomeIcon icon={nav == true ? faXmark : faBars} />
+              <FontAwesomeIcon icon={nav === true ? faXmark : faBars} />
             </span>
           </div>
 
-          <ul className="flex lg:flex-row md:flex-col flex-col  gap-6 justify-center items-center text-base ">
-            {links.map(({ to, name }) => (
-              <Link to={to} key={name} className="nav-link">
-                {name}
-              </Link>
-            ))}
-          </ul>
+          <div className="hidden md:flex space-x-4">
+            <ul className="flex lg:flex-row md:flex-col flex-col  gap-6 justify-center items-center text-base ">
+              {links.map(({ to, name }) => (
+                <Link to={to} key={name} className="nav-link">
+                  {name}
+                </Link>
+              ))}
+            </ul>
+          </div>
         </div>
-
         {/* navbar button */}
 
-        <div className="text-base mx-8">
+        <div className="text-base mx-8 hidden md:flex space-x-4">
           {user ? (
             <>
               <button
@@ -95,6 +96,49 @@ const Navbar = () => {
             </>
           )}
         </div>
+
+        {/* responsive navbar button */}
+        {nav && (
+          <>
+            <div className="md:hidden">
+              <ul className="flex lg:flex-row md:flex-col flex-col  gap-6 justify-center items-center text-base ">
+                {links.map(({ to, name }) => (
+                  <Link to={to} key={name} className="nav-link">
+                    {name}
+                  </Link>
+                ))}
+              </ul>
+            </div>
+            {/* navbar button */}
+            <div className="text-base mx-8">
+              {user ? (
+                <>
+                  <button
+                    className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md"
+                    onClick={handleLogOut}
+                  >
+                    {" "}
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    {" "}
+                    <button className="border border-black py-1 font-medium px-3 rounded-md mr-3">
+                      Login
+                    </button>
+                  </Link>
+                  <Link to="/register">
+                    <button className="bg-[#7065F0] text-white font-medium  px-3 py-1 rounded-md">
+                      Signup
+                    </button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </>
+        )}
       </nav>
     </div>
   );

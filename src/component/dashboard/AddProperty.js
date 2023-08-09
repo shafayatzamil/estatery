@@ -1,19 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import useSeller from "../hooks/useSeller";
-import Navbar from "../shared/Navbar";
 import PhoneInput from "react-phone-number-input";
 import addPropertyIcons from "../../assets/images/property_9202471.png";
 import toast from "react-hot-toast";
-import axios from "axios";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
   const [contactNumber, setContractNumber] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
   const [imageInfo, setImageInfo] = useState("");
-
-  // const [seller] = useSeller(user);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   // handle phone number change
   const handlePhoneNumberChange = (value) => {
@@ -22,15 +18,13 @@ const AddProperty = () => {
 
   // handle image change
   const handleFileChange = async (event) => {
-    // for (let i = 0; i < event.target.files.length; i++) {
-    //   const newImage = event.target.files[i];
-    //   newImage["id"] = Math.random();
-    //   setImageInfo((prevState) => [...prevState, newImage]);
-    // }
-    // console.log(imageInfo);
-    const file = event.target.files[0];
-    const base64 = await convertToBase64(file);
-    setImageInfo(base64);
+    const files = event.target.files;
+    setSelectedImages([...selectedImages, ...files]);
+
+    // chnaged after the multiple image
+    // const file = event.target.files[0];
+    // const base64 = await convertToBase64(file);
+    // setImageInfo(base64);
   };
 
   // handle submit button
@@ -45,7 +39,7 @@ const AddProperty = () => {
     const number = contactNumber;
     const price = form.price.value;
     const description = form.description.value;
-    const imageURl = imageInfo;
+    // const imageURl = imageInfo;
 
     // imageHosting
     // const imageHostKey = process.env.REACT_APP_IMGBB_KEY;
@@ -67,33 +61,41 @@ const AddProperty = () => {
     // console.log(imageURl);
 
     // property information
-    const propertyInformation = {
-      email: user?.email,
-      imageURl,
-      name,
-      location,
-      bed,
-      bathroom,
-      squarefit,
-      number,
-      price,
-      propertyType,
-      description,
-    };
+    // const propertyInformation = {
+    //   email: user?.email,
+    //   // imageURl,
+    //   selectedImages,
+    //   name,
+    //   location,
+    //   bed,
+    //   bathroom,
+    //   squarefit,
+    //   number,
+    //   price,
+    //   propertyType,
+    //   description,
+    // };
 
-    // // axious set
-    // axios
-    //   .post("http://localhost:5000/addproperty", { propertyInformation })
-    //   .then((res) => console.log(res))
-    //   .catch((error) => console.log(error));
+    // try in form data method
+    const formData = new FormData();
+    formData.append("email", user?.email);
+    formData.append("selectedImages", selectedImages);
+    formData.append("name", name);
+    formData.append("location", location);
+    formData.append("bed", bed);
+    formData.append("bathroom", bathroom);
+    formData.append("squarefit", squarefit);
+    formData.append("number", number);
+    formData.append("price", price);
+    formData.append("propertyType", propertyType);
+    formData.append("description", description);
 
-    // property information send to the backend
+    for (let i = 0; i < selectedImages.length; i++) {
+      formData.append("selectedImages", selectedImages[i]);
+    }
     fetch("http://localhost:5000/addproperty", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(propertyInformation),
+      body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -107,11 +109,8 @@ const AddProperty = () => {
         });
       });
 
-    console.log(propertyInformation);
-    //   } else {
-    //     console.log("image cannot host");
-    //   }
-    // });
+    // console.log(propertyInformation);
+
     setContractNumber(" ");
     form.reset();
   };
@@ -159,27 +158,20 @@ const AddProperty = () => {
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                     />
                   </svg>
-
-                  <>
-                    {imageInfo?.length ? (
-                      <p className="text-2xl font-bold">
-                        seletedFile:{imageInfo.name},
-                      </p>
-                    ) : (
-                      <>
-                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span className="font-semibold text-xl">
-                            Click to upload
-                          </span>{" "}
-                          or drag and drop
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          SVG, PNG, JPG or GIF (MAX. 800x400px)
-                        </p>
-                      </>
-                    )}
-                  </>
+                  <div>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold text-xl">
+                        Click to upload
+                      </span>{" "}
+                      or drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                  </div>
                 </div>
+
+                {/* changed after multiple image */}
                 <input
                   id="dropzone-file"
                   type="file"
@@ -189,6 +181,31 @@ const AddProperty = () => {
                   className="hidden"
                 />
               </label>
+            </div>
+
+            {/* selected image div */}
+            <div>
+              {/* <div className="flex gap-1 mt-4">
+                {images.map((image, index) => (
+                  <div key={index}>
+                    <img
+                      src={image}
+                      alt={`Image ${index}`}
+                      className="w-12 h-12 "
+                    />
+                  </div>
+                ))}
+              </div> */}
+              <div className="flex gap-1 mt-4">
+                {selectedImages.map((image, index) => (
+                  <img
+                    key={index}
+                    src={URL.createObjectURL(image)}
+                    alt={`Image ${index}`}
+                    className="w-12 h-12 "
+                  />
+                ))}
+              </div>
             </div>
 
             {/* name of property */}

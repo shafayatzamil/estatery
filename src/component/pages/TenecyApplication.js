@@ -4,21 +4,29 @@ import { useParams } from "react-router-dom";
 import HouseIamge from "../../assets/images/house1.jpg";
 import { Bath, BedSingle, Diamond } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
+import axios from "axios";
 
 const TenecyApplication = () => {
   const tenceyProduct = useParams();
   const [tenancyItem, setTenancyItem] = useState({});
+  const [tenecyImage, setTenencyImage] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const handlePhoneNumberChange = (value) => {
     setPhoneNumber(value);
   };
 
   useEffect(() => {
-    const url = `http://localhost:5000/${tenceyProduct.propertyType}/${tenceyProduct.id}`;
-    // console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setTenancyItem(data.data));
+    axios
+      .get(
+        `http://localhost:5000/${tenceyProduct.propertyType}/${tenceyProduct.id}`
+      )
+      .then((response) => {
+        setTenancyItem(response.data.data);
+        setTenencyImage(response.data.data.imageURL);
+      })
+      .catch((error) => {
+        console.error("Error fetching property images:", error);
+      });
   }, []);
 
   const handleSubmit = (e) => {
@@ -30,7 +38,8 @@ const TenecyApplication = () => {
     const date = form.date.value;
     const maritalstatus = form.maritalstatus.value;
     const nid = form.nid.value;
-    // console.log(name, fatherName, email, maritalstatus, nid, date);
+    const member = form.member.value; // Moved inside the form
+
     const OrderItem = {
       tenancyName: name,
       tenancyFatherName: fatherName,
@@ -40,9 +49,12 @@ const TenecyApplication = () => {
       tenancyMovingDate: date,
       tenancyProductId: tenancyItem._id,
       tenancyNumber: phoneNumber,
+      tenancyMember: member,
+      propertyName: tenancyItem.name,
+      PropertyPrice: tenancyItem,
     };
 
-    // console.log(OrderItem);
+    console.log(OrderItem);
 
     fetch("http://localhost:5000/order", {
       method: "POST",
@@ -118,9 +130,10 @@ const TenecyApplication = () => {
       <div className="card lg:card-side bg-base-100 shadow-xl mt-6 mb-8">
         <figure>
           <img
-            src={tenancyItem.imageURl ? tenancyItem.imageURl : HouseIamge}
+            // src={tenancyItem.imageURl ? tenancyItem.imageURl : HouseIamge}
+            src={tenecyImage[0]}
             alt="property"
-            className="w-72"
+            className="w-72 h-52"
           />
         </figure>
         <div className="card-body">
@@ -233,8 +246,6 @@ const TenecyApplication = () => {
                   />
                 </div>
               </div>
-
-              {/* Move date */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Moving Date</span>
@@ -243,13 +254,12 @@ const TenecyApplication = () => {
                   type="date"
                   name="date"
                   required
-                  placeholder="Date"
                   className="input input-bordered"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {/* marital status */}
               <div className="form-control">
                 <label className="label">
@@ -271,6 +281,18 @@ const TenecyApplication = () => {
                   type="text"
                   name="nid"
                   placeholder="NID NO:"
+                  className="input input-bordered"
+                />
+              </div>
+              {/* member of living */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Member of living</span>
+                </label>
+                <input
+                  type="text"
+                  name="member"
+                  placeholder="member"
                   className="input input-bordered"
                 />
               </div>

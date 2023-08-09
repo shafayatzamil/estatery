@@ -25,7 +25,7 @@ const CardDetails = () => {
   const {
     _id,
     name,
-    imageURl,
+    imageURL,
     location,
     bed,
     bathroom,
@@ -77,8 +77,12 @@ const CardDetails = () => {
         </div>
 
         {/* image section */}
-        <div className="w-full mb-4">
-          <img src={imageURl} className="w-7/12 h-[28rem]" alt="" />
+        <div className="mb-4 grid grid-cols-2 gap-2">
+          <img src={imageURL[0]} className="w-full h-full" alt="" />
+          <div className="">
+            <img src={imageURL[1]} className="w-96 h-96 m-2" alt="" />
+            <img src={imageURL[2]} className="w-96 h-96 m-2" alt="" />
+          </div>
         </div>
         {/* information section and price */}
         <div className="flex justify-between gap-12 mb-4">

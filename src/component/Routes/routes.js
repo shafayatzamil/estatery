@@ -9,6 +9,7 @@ import ErrorPage from "../pages/errorpage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Register from "../pages/login/Register";
+import PaymentFailed from "../pages/PaymentFailed";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -62,8 +63,12 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/payment/success/:trainid",
+        path: "payment/success/:trainId",
         element: <PaymentSuccess />,
+      },
+      {
+        path: "payment/failed",
+        element: <PaymentFailed></PaymentFailed>,
       },
     ],
   },

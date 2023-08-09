@@ -13,7 +13,7 @@ const Sell = () => {
       });
   }, []);
   return (
-    <div className="px-16 py-8 grid grid-cols-3 gap-6">
+    <div className="px-16 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {sellProperty.map((singleProperty) => (
         <Card key={singleProperty._id} singleProperty={singleProperty}></Card>
       ))}

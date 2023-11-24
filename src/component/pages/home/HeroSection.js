@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import House from "../../../assets/images/house2.jpg";
 import userimage from "../../../assets/images/userimage.jpg";
 import userimage1 from "../../../assets/images/zamil.jpg";
@@ -6,6 +6,30 @@ import { faBuildingUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HeroSection = () => {
+  const [activeTab, setActiveTab] = useState("rent");
+
+  if ("geolocation" in navigator) {
+    // Check if geolocation is available in the browser
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      // Get the user's current position
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // You can now use the latitude and longitude to determine the user's location
+
+      // console.log("Latitude: check" + latitude);
+      // console.log("Longitude: check " + longitude);
+    });
+  } else {
+    // Geolocation is not available in the browser
+    console.log("Geolocation is not available in this browser.");
+  }
+
+  // Function to handle tab clicks
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+  };
   return (
     <div className="pt-12 mx-auto bg-gradient-to-b from-violet-200 to-violet-100">
       <div className=" grid  lg:grid-cols-2 sm:grid-cols-1  gap-2 mx-auto">
@@ -18,21 +42,86 @@ const HeroSection = () => {
             <br />
             easily
           </h2>
-
           <p className="text-lg my-4">
             A great platform to buy, sell, or even rent your <br /> properties
             without any commisions.
           </p>
 
-          <div className="">
-            <button className="bg-white  rounded-s-md px-6 py-2 border-b-2 border-indigo-500">
+          {/* tabs */}
+          <div className="tabs">
+            <button
+              onClick={() => handleTabClick("rent")}
+              className={`tab ${
+                activeTab === "rent"
+                  ? "tab-active  border-b-2 border-indigo-500 bg-white  rounded-s-md px-6 "
+                  : ""
+              }`}
+            >
               Rent
             </button>
-            <button className="bg-white rounded-sm px-6 py-2">Buy</button>
-            <button className="bg-white rounded-e-md px-6 py-2 ">Sell</button>
+            <button
+              onClick={() => handleTabClick("buy")}
+              className={`tab ${
+                activeTab === "buy"
+                  ? " tab-active border-b-2 border-indigo-500 bg-white rounded-sm px-6 "
+                  : ""
+              }`}
+            >
+              Buy
+            </button>
+            <button
+              onClick={() => handleTabClick("sell")}
+              className={`tab ${
+                activeTab === "sell"
+                  ? " tab-active border-b-2 border-indigo-500 bg-white rounded-e-md px-6 "
+                  : ""
+              }`}
+            >
+              Sell
+            </button>
           </div>
+
           {/* drowpdown button */}
-          <div className="bg-slate-50 mb-8  hidden md:hidden lg:grid grid-cols-3 p-4 rounded-md ">
+          <div className=" sm:hidden md:hidden lg:block ">
+            {activeTab === "rent" && (
+              <div className="bg-slate-50  mb-8 p-4   grid grid-cols-3 rounded-md">
+                <div>
+                  <h2 className="text-sm text-gray-400">Location</h2>
+                  <p className="font-bold text-sm">Barcelona, Spain</p>
+                </div>
+                <div>
+                  <h2 className="text-sm text-gray-400">When</h2>
+                  <p className="font-bold text-sm">Select Move-in Date</p>
+                </div>
+                <div>
+                  <button className="text-sm bg-[#7065F0] text-white px-5 py-3 rounded-lg">
+                    Browse Properties
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "sell" && (
+              <div className="bg-slate-50 mb-8  grid grid-cols-3  p-4 rounded-md">
+                <div>
+                  <h2 className="text-sm text-gray-400">Location</h2>
+                  <p className="font-bold text-sm">Barcelona, Spain</p>
+                </div>
+                <div>
+                  <h2 className="text-sm text-gray-400">When</h2>
+                  <p className="font-bold text-sm">Select Move-in Date</p>
+                </div>
+                <div>
+                  <button className="text-sm bg-[#7065F0] text-white px-5 py-3 rounded-lg">
+                    Browse Properties
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* before dropdrown */}
+          {/* <div className="bg-slate-50 mb-8  hidden md:hidden lg:grid grid-cols-3 p-4 rounded-md ">
             <div>
               <h2 className="text-sm  text-gray-400 ">Location</h2>
               <p className="font-bold text-sm ">Barcelona, Spain</p>
@@ -46,10 +135,10 @@ const HeroSection = () => {
                 Browse Properties
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* mobile responsive search */}
-          <div className="block md:hidden lg:hidden mb-6 ">
+          {/* <div className="block md:hidden lg:hidden mb-6 ">
             <div className="form-control ">
               <div className="input-group">
                 <input
@@ -75,8 +164,7 @@ const HeroSection = () => {
                 </button>
               </div>
             </div>
-          </div>
-
+          </div> */}
           {/* icons */}
           <div className=" flex items-center gap-12 mb-12">
             <div className="mt-4">

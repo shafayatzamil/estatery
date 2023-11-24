@@ -37,7 +37,7 @@ const Register = () => {
     };
 
     // created user for backend
-    fetch("http://localhost:5000/users", {
+    fetch("https://estatery-backend-server.vercel.app/users", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(newUser),
@@ -67,7 +67,7 @@ const Register = () => {
 
     createUser(newUser.email, newUser.password)
       .then(async (result) => {
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://estatery-backend-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

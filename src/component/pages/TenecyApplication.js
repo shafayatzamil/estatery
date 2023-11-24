@@ -18,7 +18,7 @@ const TenecyApplication = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/${tenceyProduct.propertyType}/${tenceyProduct.id}`
+        `https://estatery-backend-server.vercel.app/${tenceyProduct.propertyType}/${tenceyProduct.id}`
       )
       .then((response) => {
         setTenancyItem(response.data.data);
@@ -56,7 +56,7 @@ const TenecyApplication = () => {
 
     console.log(OrderItem);
 
-    fetch("http://localhost:5000/order", {
+    fetch("https://estatery-backend-server.vercel.app/order", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

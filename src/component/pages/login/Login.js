@@ -24,13 +24,11 @@ const Login = () => {
     login(loginUser.email, loginUser.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-
         // current user for jwt token
         const currentUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://estatery-backend-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -44,6 +42,7 @@ const Login = () => {
 
             // nevigate to home page
             navigate(from, { replace: true });
+            toast.success("Login Successfull");
           });
       })
       .catch((error) => {

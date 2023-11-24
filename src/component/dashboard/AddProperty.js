@@ -93,7 +93,7 @@ const AddProperty = () => {
     for (let i = 0; i < selectedImages.length; i++) {
       formData.append("selectedImages", selectedImages[i]);
     }
-    fetch("http://localhost:5000/addproperty", {
+    fetch("https://estatery-backend-server.vercel.app/addproperty", {
       method: "POST",
       body: formData,
     })
